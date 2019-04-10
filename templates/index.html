@@ -44,12 +44,12 @@
                     {% endfor %}
 
                     <div class="pagination-simple">
-                        {% if previous %}
-                            <a href="{% url 'index' %}?page={{ previous }}">上一页</a>
+                        {% if articles.has_previous %}
+                            <a href="{% url 'index' %}?page={{ articles.previous_page_number }}">上一页</a>
                         {% endif %}
-                        <span class="current">第 {{ page }} 页 / 共 {{ page_count }} 页</span>
-                        {% if next %}
-                            <a href="{% url 'index' %}?page={{ next }}">下一页</a>
+                        <span class="current">第 {{ articles.number }} 页 / 共 {{ articles.paginator.num_pages }} 页</span>
+                        {% if articles.has_next %}
+                            <a href="{% url 'index' %}?page={{ articles.next_page_number }}">下一页</a>
                         {% endif %}
                     </div>
 

@@ -1,6 +1,6 @@
 import markdown
-from django.http import JsonResponse
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from markdown.extensions.toc import TocExtension
 
 from blog.models import Articles
@@ -10,6 +10,7 @@ from tools.pages import get_page_index
 content_number = 10
 
 
+'''
 def index(request):
     """
     首页
@@ -28,6 +29,23 @@ def index(request):
         "page_count": page_count
     }
     return render(request, "index.html", context=content)
+'''
+
+
+def index(request):
+    """
+    首页
+    :param request:
+    :return:
+    """
+    page = request.GET.get("page", 1)
+    articles = Articles.objects.all()
+    paginator = Paginator(articles, content_number)
+    articles = paginator.get_page(page)
+    context = {
+        "articles": articles
+    }
+    return render(request, "index.html", context=context)
 
 
 def get_article(request):
