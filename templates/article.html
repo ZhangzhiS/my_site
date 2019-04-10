@@ -1,0 +1,33 @@
+{% extends "__base__.html" %}
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+{% block content %}
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8">
+                    <article class="post post-1">
+                        <header class="entry-header">
+                            <h1 class="entry-title">{{ article.title }}</h1>
+                            <div class="entry-meta">
+                                <span class="post-date"><a href="#"><time
+                                        class="entry-date">{{ article.date }}</time></a></span>
+                                <span class="post-author"><a href="#">{{ article.author }}</a></span>
+                            </div>
+                        </header>
+                        <div class="entry-content clearfix" id="md_content">
+                            <p>{{ article.contents|safe }}</p>
+                        </div>
+                    </article>
+                </main>
+                <aside class="col-md-4">
+                    {% include "__newest__.html" %}
+                    {% include "__pigeonhole__.html" %}
+                    {% include "__classify__.html" %}
+                    {% include "__tags__.html" %}
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}

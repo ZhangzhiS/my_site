@@ -1,0 +1,10 @@
+
+\.idea/
+
+tools/__pycache__/
+
+my_site/__pycache__/
+
+blog/__pycache__/
+
+blog/migrations/__pycache__/

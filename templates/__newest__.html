@@ -1,0 +1,12 @@
+<div class="widget widget-recent-posts">
+    <h3 class="widget-title">最新文章</h3>
+    <script>
+        $.getJSON("{% url 'get-newest' %}", function (res) {
+            for (var i = res.length - 1 ; i >= 0; i --){
+                $("#newest_list").append("<li><a href=\"/article?article_id="+ res[i].id + "\">" + res[i].title + "</a></li>")
+            }
+        })
+    </script>
+    <ul id="newest_list">
+    </ul>
+</div>

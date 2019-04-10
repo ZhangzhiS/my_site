@@ -1,0 +1,66 @@
+{% extends "__base__.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block script %}
+    <style>
+        .line-clamp-3 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8">
+                    {% for article in articles %}
+                        <article class="post">
+                            <header class="entry-header">
+                                <h1 class="entry-title">
+                                    <a href="single.html">{{ article.title }}</a>
+                                </h1>
+                                <div class="entry-meta">
+                                    {#                            <span class="post-category"><a href="#">{{ article.get_tags }}</a></span>#}
+                                    <span class="post-date"><a href="#"><time
+                                            class="entry-date">{{ article.date }}</time></a></span>
+                                    <span class="post-author"><a href="#">{{ article.author }}</a></span>
+                                    {#                            <span class="comments-link"><a href="#">4 评论</a></span>#}
+                                    {#                            <span class="views-count"><a href="#">588 阅读</a></span>#}
+                                </div>
+                            </header>
+                            <div class="entry-content clearfix">
+                                <p class="line-clamp-3">{{ article.contents|safe }}</p>
+                                <div class="read-more cl-effect-14">
+                                    <a href="{% url 'article' %}?article_id={{ article.id }} " class="more-link">继续阅读 <span
+                                            class="meta-nav"></span></a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+
+                    <div class="pagination-simple">
+                        {% if previous %}
+                            <a href="{% url 'index' %}?page={{ previous }}">上一页</a>
+                        {% endif %}
+                        <span class="current">第 {{ page }} 页 / 共 {{ page_count }} 页</span>
+                        {% if next %}
+                            <a href="{% url 'index' %}?page={{ next }}">下一页</a>
+                        {% endif %}
+                    </div>
+
+                </main>
+                <aside class="col-md-4">
+                    {% include "__newest__.html" %}
+{#                    {% include "__pigeonhole__.html" %}#}
+{#                    {% include "__classify__.html" %}#}
+                    {% include "__tags__.html" %}
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<div class="widget widget-tag-cloud">
+    <script>
+        $.getJSON("{% url 'get-tags' %}", function (res) {
+            for (var i = res.length - 1 ; i >= 0; i --){
+                $("#tag_list").append("<li><a href='#'>" + res[i] + "</a></li>")
+            }
+        })
+    </script>
+    <h3 class="widget-title">标签云</h3>
+    <ul id="tag_list">
+    </ul>
+</div>
