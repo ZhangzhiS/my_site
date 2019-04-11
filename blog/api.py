@@ -7,13 +7,16 @@
 from django.http import JsonResponse
 from blog.models import Articles, Tags
 from django.forms.models import model_to_dict
+from django.core.paginator import Paginator
 
 
 def get_newest(request):
     """
     异步加载最新文章
     """
-    articles = Articles.objects.order_by("-date")[:3]
+    articles = Articles.objects.order_by("date")
+    paginator = Paginator(articles, 3)
+    articles = paginator.get_page(1)
     newest_articles = []
     for article in articles:
         temp = model_to_dict(article)

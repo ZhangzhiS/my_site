@@ -3,11 +3,11 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from markdown.extensions.toc import TocExtension
 
-from blog.models import Articles
+from blog.models import Articles, ArticleTag
 from tools.pages import get_page_index
 
 # Create your views here.
-content_number = 10
+content_number = 2
 
 
 '''
@@ -39,7 +39,7 @@ def index(request):
     :return:
     """
     page = request.GET.get("page", 1)
-    articles = Articles.objects.all()
+    articles = Articles.objects.order_by("-date")
     paginator = Paginator(articles, content_number)
     articles = paginator.get_page(page)
     context = {
@@ -70,5 +70,17 @@ def get_article(request):
     return render(request, "article.html", context=content)
 
 
-
+def get_tags_article(request):
+    tag = request.GET.get("tag", None)
+    page = request.GET.get("page", 1)
+    if tag:
+        articles = Articles.objects.filter(articletag__tag__tag_name=tag).order_by("-date")
+    else:
+        articles = Articles.objects.order_by("-date")
+    paginator = Paginator(articles, content_number)
+    articles = paginator.get_page(page)
+    context = {
+        "articles": articles
+    }
+    return render(request, "tags_article.html", context=context)
 

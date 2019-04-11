@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name="index"),
     path('article/', views.get_article, name="article"),
+    path('article/list', views.get_tags_article, name="article-list"),
     path('api/get/newest/', api.get_newest, name="get-newest"),
     path('api/get/tags/', api.get_tags, name="get-tags"),
 ]

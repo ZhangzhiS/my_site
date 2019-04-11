@@ -2,7 +2,7 @@
     <script>
         $.getJSON("{% url 'get-tags' %}", function (res) {
             for (var i = res.length - 1 ; i >= 0; i --){
-                $("#tag_list").append("<li><a href='#'>" + res[i] + "</a></li>")
+                $("#tag_list").append("<li><a href='{% url 'article-list' %}?tag="+res[i]+"\'>" + res[i] + "</a></li>")
             }
         })
     </script>
