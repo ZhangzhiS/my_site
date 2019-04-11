@@ -1,7 +1,4 @@
 {% extends "__base__.html" %}
-{% block title %}
-    {{ title }}
-{% endblock %}
 {% block script %}
     <style>
         .line-clamp-3 {
@@ -22,7 +19,7 @@
                         <article class="post">
                             <header class="entry-header">
                                 <h1 class="entry-title">
-                                    <a href="single.html">{{ article.title }}</a>
+                                    <a href="{% url 'article' %}?article_id={{ article.id }} ">{{ article.title }}</a>
                                 </h1>
                                 <div class="entry-meta">
                                     {#                            <span class="post-category"><a href="#">{{ article.get_tags }}</a></span>#}
